@@ -475,6 +475,6 @@ const dong=async()=>{if(!CF.k||!CF.u||dangDong)return;dangDong=true;try{const cu
  Object.assign(S,gopTienDo(S,r.tien));luuMay();syncTop();const lichDoi=JSON.stringify(r.lich)!==JSON.stringify(LICH_HOM);LICH_HOM=r.lich;
  if(r.kho){localStorage.setItem('gt_kho',JSON.stringify(r.kho));localStorage.setItem('gt_rev',r.rev);if(P.el.hidden&&JSON.stringify(r.kho)!==JSON.stringify(KHO_MOI)){location.reload();return}}
  if(P.el.hidden&&(lichDoi||cu!==JSON.stringify(TIEN.map(k=>S[k])))&&cur!=='words')go(cur)}catch(e){}finally{dangDong=false}};
-dongNgay=dong;addEventListener('online',dong);document.addEventListener('visibilitychange',()=>{dong()});
+dongNgay=dong;addEventListener('online',dong);addEventListener('hashchange',()=>location.reload());document.addEventListener('visibilitychange',()=>{dong()});
 if('serviceWorker'in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
 taiAud();syncTop();go('map');dong();
