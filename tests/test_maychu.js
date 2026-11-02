@@ -68,6 +68,20 @@ test('luot tuoi cay khong mat khi hai may cung hoc', () => {
   assert.equal(m.goi({ k: K, tien: { vuon: { n: 10, d: '2026-11-03', hom: 1 } } }).tien.vuon.hom, 1);
 });
 
+test('so cau sai: gui lai khong trung, doc moi nhat truoc, bao loi danh dau dung dong', () => {
+  const m = dungMayChu(true);
+  const a = { id: 's1', t: '2026-11-02 14:00', tro: 'Màn 3', cau: 'Chọn chữ: 感冒', chon: '发烧', dung: '感冒' };
+  const b = { id: 's2', t: '2026-11-02 14:05', tro: 'Câu cá', cau: 'Câu cá: mèo', chon: '狗', dung: '猫' };
+  m.goi({ k: K, sai: [a] });
+  m.goi({ k: K, sai: [a, b] });
+  const ds = m.goi({ k: K, laySai: true }).sai;
+  assert.deepEqual(ds.map(x => x.id), ['s2', 's1']);
+  assert.equal(ds[1].t, '2026-11-02 14:00');
+  assert.ok(m.goi({ k: K, baoLoi: { id: 's1', ghi: 'nghi đáp án sai' } }).ok);
+  assert.equal(m.goi({ k: K, laySai: true }).sai[1].bao, 'nghi đáp án sai');
+  assert.equal(m.goi({ k: K, baoLoi: { id: 'khong-co' } }).ok, false);
+});
+
 test('nap bai: chi them, chay lai khong trung, sai dang bi chan', () => {
   const m = dungMayChu();
   const bai = { id: 'b1', loai: 'riddle', data: ['a'], ngay: '2026-11-08' };

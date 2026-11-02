@@ -4,6 +4,7 @@
 const MUC_TIEN = ['xp', 'streak', 'last', 'stars', 'box', 'boxT', 'exams', 'q', 'vuon'];
 const LOAI_BAI = ['bai', 'riddle', 'order', 'tip', 'speak', 'chat'];
 const COT_KHO = ['id', 'loai', 'data', 'ngay', 'bat'], COT_LICH = ['ngay', 'bai', 'tro', 'loi_nhan'], COT_TIEN = ['muc', 'gia_tri'];
+const COT_SAI = ['id', 'thoi_gian', 'tro', 'cau_hoi', 'da_chon', 'dap_an', 'bao_loi'];
 const TOI_DA_NAP = 200, TOI_DA_O = 45000;
 
 function doGet() {
@@ -34,6 +35,9 @@ function xuLy_(goi) {
     else if (daCo !== khoa) return { ok: false, loi: 'khoa' };
 
     if (goi.nap) return napBai_(goi.nap, kho);
+    if (goi.laySai) return { ok: true, sai: docSai_() };
+    if (goi.baoLoi) return baoLoi_(goi.baoLoi);
+    if (Array.isArray(goi.sai) && goi.sai.length) ghiSai_(goi.sai);
 
     const tien = gopTienDo(docTien_(), goi.tien || {});
     ghiTien_(tien);
@@ -119,4 +123,30 @@ function napBai_(nap, kho) {
     else { sl.getRange(sl.getLastRow() + 1, 1, 1, COT_LICH.length).setValues([dong]); cu.push(l.ngay); }
   }
   return { ok: true, them, lich: lich.length };
+}
+
+// So cau sai: may gui kem moi lan dong bo. Gui lai cung id thi bo qua.
+function ghiSai_(ds) {
+  const sh = bang_('SAI', COT_SAI);
+  const co = new Set(sh.getDataRange().getValues().slice(-3000).map(d => String(d[0])));
+  const moi = ds.slice(0, 200).filter(r => r && typeof r.id === 'string' && !co.has(r.id))
+    .map(r => [r.id, r.t, r.tro, r.cau, r.chon, r.dung, ''].map(v => String(v === undefined ? '' : v).slice(0, 500)));
+  if (moi.length) sh.getRange(sh.getLastRow() + 1, 1, moi.length, COT_SAI.length).setNumberFormat('@').setValues(moi);
+}
+
+function docSai_() {
+  return bang_('SAI', COT_SAI).getDataRange().getValues().slice(1).slice(-300).reverse()
+    .map(d => ({ id: String(d[0]), t: chuoiNgay_(d[1]), tro: String(d[2]), cau: String(d[3]), chon: String(d[4]), dung: String(d[5]), bao: String(d[6] || '') }));
+}
+
+// Danh dau dong nghi dap an cua app sai, de chu kiem tra lai
+function baoLoi_(b) {
+  const sh = bang_('SAI', COT_SAI), v = sh.getDataRange().getValues();
+  for (let i = v.length - 1; i > 0; i--) {
+    if (String(v[i][0]) === String(b && b.id)) {
+      sh.getRange(i + 1, 7, 1, 1).setNumberFormat('@').setValues([[String(b.ghi || 'Có vấn đề').slice(0, 200)]]);
+      return { ok: true };
+    }
+  }
+  return { ok: false, loi: 'khong thay cau nay' };
 }

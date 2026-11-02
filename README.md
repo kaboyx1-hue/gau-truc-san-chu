@@ -22,6 +22,7 @@ Sheet có 3 trang:
 - `TIEN_DO`: tiến độ đã gộp từ mọi máy.
 - `LICH`: lịch từng ngày. Cột `bai` là tên bài, `tro` là mã trò cách nhau dấu phẩy (ví dụ `snake,fish,word`), `loi_nhan` hiện trên màn Hôm nay. Ngày không có dòng thì app tự xoay.
 - `KHO_BAI`: bài thêm mới, chỉ thêm không sửa. Đặt cột `bat` thành `0` để tắt một bài lỗi.
+- `SAI`: mọi câu trả lời sai, gồm lúc nào, ở trò nào, câu hỏi, đã chọn gì, đáp án đúng. Cột `bao_loi` có chữ là người học đã bấm 🚩 báo nghi đáp án của app sai, cần kiểm tra lại nội dung bài.
 
 ## Phát hành
 
