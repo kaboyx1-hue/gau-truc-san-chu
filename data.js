@@ -263,4 +263,66 @@ const HOA=[
 ['杜鹃','dùjuān','Hoa đỗ quyên','#FF5C9E','#FFD6E5',5,21,30],
 ['桂花','guìhuā','Hoa quế','#FFB347','#FF8C00',4,20,20],
 ['康乃馨','kāngnǎixīn','Hoa cẩm chướng','#F15BB5','#FFD6EC',20,10,32]];
+const CHAT2=[
+{id:'traSua',t:'Quán trà sữa (nâng cao)',e:'🧋',npc:'🧑‍🍳',muc:'Gọi một ly trà sữa trân châu, ly lớn, nửa đường, ít đá, mang về, trả bằng WeChat.',co:{tra:'Gọi trà sữa trân châu',lon:'Ly lớn',duong:'Nửa đường',da:'Ít đá',mang:'Mang về',wx:'Trả bằng WeChat'},n:{
+ n1:['欢迎光临!想喝点儿什么?','huānyíng guānglín! xiǎng hē diǎnr shénme?','Chào mừng quý khách! Muốn uống gì?',[
+  ['一杯珍珠奶茶。','yì bēi zhēnzhū nǎichá.','Một ly trà sữa trân châu.','n2',1,'tra'],
+  ['你们有什么推荐的吗?','nǐmen yǒu shénme tuījiàn de ma?','Quán có món nào gợi ý không?','n1b',1],
+  ['我要一杯咖啡。','wǒ yào yì bēi kāfēi.','Cho tôi một ly cà phê.','n1c',0]]],
+ n1b:['我们的招牌是珍珠奶茶,很多人点。','wǒmen de zhāopai shì zhēnzhū nǎichá, hěn duō rén diǎn.','Món đặc trưng của quán là trà sữa trân châu, nhiều người gọi lắm.',[
+  ['好,那就来一杯。','hǎo, nà jiù lái yì bēi.','Được, vậy cho một ly.','n2',1,'tra'],
+  ['我不喜欢甜的。','wǒ bù xǐhuan tián de.','Tôi không thích đồ ngọt.','n1d',0]]],
+ n1c:['不好意思,我们只有奶茶和果茶。','bù hǎoyìsi, wǒmen zhǐ yǒu nǎichá hé guǒchá.','Xin lỗi, quán chỉ có trà sữa và trà trái cây.','n1'],
+ n1d:['没关系,甜度可以选。','méi guānxi, tiándù kěyǐ xuǎn.','Không sao, độ ngọt chọn được.','n1b'],
+ n2:['大杯还是中杯?','dà bēi háishi zhōng bēi?','Ly lớn hay ly vừa?',[
+  ['大杯。','dà bēi.','Ly lớn.','n3',1,'lon'],
+  ['中杯就行。','zhōng bēi jiù xíng.','Ly vừa là được.','n3',0],
+  ['我是大人。','wǒ shì dàren.','Tôi là người lớn.','n2x',-1]]],
+ n2x:['啊?我是问杯子的大小。','á? wǒ shì wèn bēizi de dàxiǎo.','Hả? Tôi đang hỏi cỡ ly.','n2'],
+ n3:['甜度呢?正常糖、半糖还是少糖?','tiándù ne? zhèngcháng táng, bàn táng háishi shǎo táng?','Độ ngọt thì sao? Đường bình thường, nửa đường hay ít đường?',[
+  ['半糖。','bàn táng.','Nửa đường.','n4',1,'duong'],
+  ['正常糖吧。','zhèngcháng táng ba.','Đường bình thường đi.','n4',0],
+  ['不要糖,也不要奶。','bú yào táng, yě bú yào nǎi.','Không đường, cũng không sữa.','n3x',-1]]],
+ n3x:['不要奶就不是奶茶了哦。','bú yào nǎi jiù bú shì nǎichá le o.','Không có sữa thì đâu còn là trà sữa nữa.','n3'],
+ n4:['冰块呢?','bīngkuài ne?','Còn đá thì sao?',[
+  ['少冰,谢谢。','shǎo bīng, xièxie.','Ít đá, cảm ơn.','n5',1,'da'],
+  ['去冰。','qù bīng.','Không đá.','n5',0],
+  ['我不冷。','wǒ bù lěng.','Tôi không lạnh.','n4x',-1]]],
+ n4x:['哈哈,我是问饮料里要不要冰。','hāhā, wǒ shì wèn yǐnliào lǐ yào bu yào bīng.','Haha, tôi hỏi là đồ uống có cần cho đá không.','n4'],
+ n5:['在这儿喝还是带走?','zài zhèr hē háishi dàizǒu?','Uống ở đây hay mang đi?',[
+  ['带走。','dàizǒu.','Mang đi.','n6',1,'mang'],
+  ['在这儿喝。','zài zhèr hē.','Uống ở đây.','n6',0]]],
+ n6:['一共十六块。怎么付?','yígòng shíliù kuài. zěnme fù?','Tổng 16 tệ. Trả bằng gì?',[
+  ['微信支付。','wēixìn zhīfù.','Trả bằng WeChat.','n7',1,'wx'],
+  ['可以用现金吗?','kěyǐ yòng xiànjīn ma?','Trả tiền mặt được không?','n6b',0],
+  ['太贵了,便宜点儿吧!','tài guì le, piányi diǎnr ba!','Đắt quá, bớt chút đi!','n6x',0]]],
+ n6b:['可以,找您四块。','kěyǐ, zhǎo nín sì kuài.','Được, thối lại bạn 4 tệ.','n7'],
+ n6x:['不好意思,我们这儿不能讲价。','bù hǎoyìsi, wǒmen zhèr bù néng jiǎngjià.','Xin lỗi, quán không trả giá được.','n6'],
+ n7:['好的,请稍等,做好了叫您。','hǎo de, qǐng shāo děng, zuò hǎo le jiào nín.','Được, chờ chút, làm xong sẽ gọi bạn.',[]]}},
+{id:'khamBenh',t:'Đi khám bệnh',e:'🏥',npc:'👩‍⚕️',muc:'Nói cho bác sĩ biết mình bị gì, sốt bao nhiêu độ, bị mấy ngày rồi, và hỏi uống thuốc trước hay sau bữa ăn.',co:{trieu:'Nói triệu chứng',do:'Nói nhiệt độ',ngay:'Nói bị mấy ngày',thuoc:'Hỏi cách uống thuốc'},n:{
+ n1:['你好,哪儿不舒服?','nǐ hǎo, nǎr bù shūfu?','Chào bạn, bạn khó chịu ở đâu?',[
+  ['我感冒了,头很疼。','wǒ gǎnmào le, tóu hěn téng.','Tôi bị cảm, đầu đau lắm.','n2',1,'trieu'],
+  ['我有点儿发烧。','wǒ yǒudiǎnr fāshāo.','Tôi hơi sốt.','n2b',1,'trieu'],
+  ['我很舒服。','wǒ hěn shūfu.','Tôi rất dễ chịu.','n1x',-1]]],
+ n1x:['舒服的话,为什么来医院呢?','shūfu dehuà, wèishénme lái yīyuàn ne?','Dễ chịu thì sao lại đến bệnh viện?','n1'],
+ n2:['发烧吗?','fāshāo ma?','Có sốt không?',[
+  ['有一点儿,三十八度。','yǒu yìdiǎnr, sānshíbā dù.','Hơi sốt, 38 độ.','n3',1,'do'],
+  ['不发烧。','bù fāshāo.','Không sốt.','n3',1,'do']]],
+ n2b:['多少度?','duōshao dù?','Bao nhiêu độ?',[
+  ['三十八度。','sānshíbā dù.','38 độ.','n3',1,'do'],
+  ['三十八块。','sānshíbā kuài.','38 tệ.','n2bx',-1]]],
+ n2bx:['是体温,不是钱哦。','shì tǐwēn, bú shì qián o.','Là nhiệt độ cơ thể, không phải tiền đâu.','n2b'],
+ n3:['几天了?','jǐ tiān le?','Mấy ngày rồi?',[
+  ['两天了。','liǎng tiān le.','Hai ngày rồi.','n4',1,'ngay'],
+  ['昨天开始的。','zuótiān kāishǐ de.','Bắt đầu từ hôm qua.','n4',1,'ngay'],
+  ['我二十八岁。','wǒ èrshíbā suì.','Tôi 28 tuổi.','n3x',-1]]],
+ n3x:['我问的是病了几天。','wǒ wèn de shì bìng le jǐ tiān.','Tôi hỏi là bị bệnh mấy ngày rồi.','n3'],
+ n4:['问题不大。这个药一天吃三次,多喝水,多休息。','wèntí bú dà. zhège yào yì tiān chī sān cì, duō hē shuǐ, duō xiūxi.','Không có gì nghiêm trọng. Thuốc này ngày uống ba lần, uống nhiều nước, nghỉ ngơi nhiều.',[
+  ['饭前吃还是饭后吃?','fàn qián chī háishi fàn hòu chī?','Uống trước hay sau bữa ăn?','n5',1,'thuoc'],
+  ['好的,谢谢医生。','hǎo de, xièxie yīshēng.','Vâng, cảm ơn bác sĩ.','n6',0],
+  ['我不想吃药。','wǒ bù xiǎng chī yào.','Tôi không muốn uống thuốc.','n4x',0]]],
+ n4x:['不吃药的话,好得慢一点儿。','bù chī yào dehuà, hǎo de màn yìdiǎnr.','Không uống thuốc thì sẽ khỏi chậm hơn.','n4'],
+ n5:['饭后吃。','fàn hòu chī.','Uống sau bữa ăn.',[
+  ['明白了,谢谢医生!','míngbai le, xièxie yīshēng!','Hiểu rồi, cảm ơn bác sĩ!','n6',1]]],
+ n6:['不客气,早点儿好起来!','bú kèqi, zǎo diǎnr hǎo qǐlai!','Không có gì, mau khỏe nhé!',[]]}}];
 const LV={"丈夫":2,"妻子":2,"孩子":1,"哥哥":1,"姐姐":1,"弟弟":1,"妹妹":1,"朋友":1,"起床":1,"洗澡":3,"穿":1,"跑步":2,"锻炼":3,"跳舞":2,"休息":1,"旅游":2,"高兴":1,"累":2,"忙":1,"便宜":1,"贵":1,"远":2,"近":2,"快":2,"牛奶":1,"鸡蛋":1,"方便面":3,"西瓜":3,"蛋糕":3,"啤酒":3,"奶茶":2,"甜":3,"菜单":3,"饱":3,"筷子":3,"碗":3,"饿":3,"渴":3,"外卖":3,"请客":3,"超市":1,"裙子":3,"衬衫":3,"鞋":3,"换":3,"试":3,"信用卡":3,"合适":3,"地铁":2,"司机":3,"机场":2,"高铁":3,"护照":3,"行李":3,"迟到":3,"晚点":3,"附近":3,"左边":2,"右边":2,"旁边":2,"地图":3,"过":2,"楼":2,"电梯":3,"银行":3,"公园":3,"图书馆":3,"医院":1,"凉快":3,"季节":3,"晴":2,"伞":3,"作业":3,"考试":2,"成绩":3,"练习":3,"复习":3,"词典":3,"句子":3,"水平":3,"经理":3,"同事":3,"办公室":3,"会议":3,"开会":3,"请假":3,"休假":3,"邮件":3,"准备":2,"检查":3,"解决":3,"完成":3,"提高":3,"决定":3,"帮忙":2,"发现":3,"担心":3,"害怕":3,"生气":3,"着急":3,"难过":3,"满意":3,"相信":3,"关心":3,"差不多":3,"不好意思":2,"怎么办":3,"聊天儿":3,"拍照":3};
