@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 const goc = path.join(__dirname, '..');
-const D = new Function(fs.readFileSync(path.join(goc, 'data.js'), 'utf8') + ';return {WORLDS,RIDDLES,RADICALS,MEASURE,ORDERS,CHAINS,CHATS,SPEAK,PASSAGES,TIPS,NATURAL,LV}')();
+const D = new Function(fs.readFileSync(path.join(goc, 'data.js'), 'utf8') + ';return {WORLDS,RIDDLES,RADICALS,MEASURE,ORDERS,CHAINS,CHATS,SPEAK,PASSAGES,TIPS,NATURAL,HOA,LV}')();
 const tu = D.WORLDS.flatMap(W => W.lessons.flatMap(L => L.w.split('\n').map(l => l.split('|'))));
 
 test('moi tu du 7 cot, khong trung, cum chua dung tu', () => {
@@ -38,8 +38,13 @@ test('moi cau hay doc deu co am thanh', () => {
   const can = [...tu.flatMap(f => [f[0], f[4]]), ...D.RIDDLES.flatMap(r => [r[0], r[3]]), ...D.RADICALS.map(r => r[2]),
     ...D.ORDERS.map(o => o[0].replace(/\|/g, '')), ...D.CHATS.flatMap(C => C.s.flatMap(s => [s[0], s[3]])),
     ...D.SPEAK.flatMap(x => [x[2], x[5]]), ...D.TIPS.flatMap(x => (x[1] ? [x[0], x[2]] : [x[2]])), ...D.NATURAL.map(x => x[0]),
-    ...D.MEASURE.map(m => '一' + m[4] + m[0])];
+    ...D.MEASURE.map(m => '一' + m[4] + m[0]), ...D.HOA.map(h => h[0])];
   assert.deepEqual(can.filter(t => !am[t]), []);
+});
+
+test('moi loai hoa khac nhau', () => {
+  assert.equal(new Set(D.HOA.map(h => h[0])).size, D.HOA.length);
+  assert.equal(new Set(D.HOA.map(h => h[2])).size, D.HOA.length);
 });
 
 test('moi bai ngoai de duoc gan nhan dung', () => {

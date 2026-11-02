@@ -1,7 +1,7 @@
 // May chu cua Gau Truc San Chu: tien do, lich theo ngay va kho bai moi nam trong Google Sheet cua chinh script nay.
 // Khong co khoa trong file nay. Khoa rieng duoc giu trong Script Properties.
 
-const MUC_TIEN = ['xp', 'streak', 'last', 'stars', 'box', 'boxT', 'exams', 'q'];
+const MUC_TIEN = ['xp', 'streak', 'last', 'stars', 'box', 'boxT', 'exams', 'q', 'vuon'];
 const LOAI_BAI = ['bai', 'riddle', 'order', 'tip', 'speak', 'chat'];
 const COT_KHO = ['id', 'loai', 'data', 'ngay', 'bat'], COT_LICH = ['ngay', 'bai', 'tro', 'loi_nhan'], COT_TIEN = ['muc', 'gia_tri'];
 const TOI_DA_NAP = 200, TOI_DA_O = 45000;

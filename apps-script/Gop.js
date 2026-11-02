@@ -14,12 +14,14 @@ function gopTienDo(a, b) {
   const q = qa.d === qb.d
     ? { d: qa.d, learn: Math.max(qa.learn || 0, qb.learn || 0), game: Math.max(qa.game || 0, qb.game || 0), right: Math.max(qa.right || 0, qb.right || 0) }
     : ((qa.d || '') > (qb.d || '') ? qa : qb);
+  const va = a.vuon || {}, vb = b.vuon || {};
+  const vuon = { n: Math.max(va.n || 0, vb.n || 0), d: (va.d || '') > (vb.d || '') ? va.d : (vb.d || ''), hom: va.d === vb.d ? Math.max(va.hom || 0, vb.hom || 0) : ((va.d || '') > (vb.d || '') ? va.hom : vb.hom) || 0 };
   const la = a.last || '', lb = b.last || '';
   return {
     xp: Math.max(a.xp || 0, b.xp || 0),
     streak: la === lb ? Math.max(a.streak || 0, b.streak || 0) : ((la > lb ? a.streak : b.streak) || 0),
     last: la > lb ? la : lb,
-    stars: maxO(a.stars, b.stars), box, boxT, exams, q,
+    stars: maxO(a.stars, b.stars), box, boxT, exams, q, vuon,
   };
 }
 if (typeof module !== 'undefined') module.exports = { gopTienDo };

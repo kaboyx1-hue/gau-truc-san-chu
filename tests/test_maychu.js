@@ -60,6 +60,14 @@ test('hai may khong lam mat tien do cua nhau', () => {
   assert.equal(r.exams.D1.pct, 80);
 });
 
+test('luot tuoi cay khong mat khi hai may cung hoc', () => {
+  const m = dungMayChu();
+  m.goi({ k: K, tien: { vuon: { n: 9, d: '2026-11-02', hom: 3 } } });
+  const r = m.goi({ k: K, tien: { vuon: { n: 7, d: '2026-11-02', hom: 4 } } }).tien.vuon;
+  assert.deepEqual(r, { n: 9, d: '2026-11-02', hom: 4 });
+  assert.equal(m.goi({ k: K, tien: { vuon: { n: 10, d: '2026-11-03', hom: 1 } } }).tien.vuon.hom, 1);
+});
+
 test('nap bai: chi them, chay lai khong trung, sai dang bi chan', () => {
   const m = dungMayChu();
   const bai = { id: 'b1', loai: 'riddle', data: ['a'], ngay: '2026-11-08' };

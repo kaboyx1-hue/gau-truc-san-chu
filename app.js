@@ -21,10 +21,10 @@ const MODES={
  rong:{n:'Rồng con',e:'🐲',d:'Không pinyin, 12 giây mỗi câu, 3 tim',py:false,timer:12,hearts:3,mult:1.5,types:['rev','listen','chunk','tone'],lv:'Khó'},
  king:{n:'Bản địa',e:'👑',d:'Nghe và đọc chữ Hán là chính, 7 giây, 2 tim',py:false,timer:7,hearts:2,mult:2,types:['listen','chunk','tone'],lv:'Siêu khó'}};
 
-const TIEN=['xp','streak','last','stars','box','boxT','exams','q'];let LICH_HOM=null,dangDong=false,henD,dongNgay=()=>{};
+const TIEN=['xp','streak','last','stars','box','boxT','exams','q','vuon'];let LICH_HOM=null,dangDong=false,henD,dongNgay=()=>{};
 const henDong=()=>{clearTimeout(henD);henD=setTimeout(()=>dongNgay(),3000)};
 const KEY='gt_s1',today=()=>new Date().toLocaleDateString('sv');
-const SEED={xp:0,streak:0,last:'',mode:'mam',review:!!CF.duyet,sound:true,stars:{},box:{},boxT:{},exams:{},q:{}};
+const SEED={xp:0,streak:0,last:'',mode:'mam',review:!!CF.duyet,sound:true,stars:{},box:{},boxT:{},exams:{},q:{},vuon:{n:0,d:'',hom:0}};
 let S;try{S=Object.assign({},SEED,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){S={...SEED}}
 const luuMay=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 const save=()=>{luuMay();henDong()};
@@ -61,6 +61,23 @@ function syncTop(){$('#sXp').textContent=S.xp;$('#sStreak').textContent=S.streak
 function addXp(n){S.xp+=n;if(S.last!==today()){S.streak=S.last?S.streak+1:S.streak;S.last=today()}save();syncTop()}
 function learnWord(h,ok){S.box[h]=ok?Math.min(3,(S.box[h]||0)+1):0;S.boxT[h]=Date.now();save()}
 
+/* ===== Chậu cây: mỗi lần hoàn thành bài là một lượt tưới, đủ lượt thì nở một loài hoa mới ===== */
+const TUOI_MOI_HOA=16,TUOI_MOI_NGAY=5,MOC=[3,7,12];
+const giaiDoan=p=>p>=MOC[2]?3:p>=MOC[1]?2:p>=MOC[0]?1:0;
+const TEN_GD=['Hạt giống','Mầm non','Cây con','Nụ hoa'];
+function svgHoa(i,to=1,cls=''){const[,,,c,t,n,rx,ry]=HOA[i%HOA.length];const c2=Array.from({length:n},(_,k)=>`<ellipse cx="0" cy="${-ry*.9}" rx="${rx}" ry="${ry}" fill="${c}" stroke="rgb(34 49 79 / .16)" stroke-width="1.2" transform="rotate(${k*360/n})"/>`).join('');return`<g class="${cls}" transform="scale(${to})">${c2}<circle r="${Math.max(9,rx*.8)}" fill="${t}" stroke="rgb(34 49 79 / .2)"/></g>`}
+function svgChau(p,i){const gd=giaiDoan(p),h=[0,46,84,112][gd];return`<svg class="chau" viewBox="0 0 200 230" role="img" aria-label="${TEN_GD[gd]}"><g class="thanCay">
+ ${gd?`<path d="M100 178 Q${gd>1?92:100} ${178-h/2} 100 ${178-h}" stroke="#3FA34D" stroke-width="7" fill="none" stroke-linecap="round"/>`:''}
+ ${gd>=1?`<path d="M100 ${178-h*.55} q24 -22 44 -8 q-20 18 -44 8z" fill="#55C271"/>`:''}${gd>=2?`<path d="M100 ${178-h*.38} q-26 -20 -46 -6 q22 18 46 6z" fill="#46B463"/><path d="M100 ${178-h*.8} q20 -16 36 -6 q-18 14 -36 6z" fill="#6AD083"/>`:''}
+ ${gd===3?`<g transform="translate(100 ${178-h})"><ellipse cy="-12" rx="13" ry="20" fill="${HOA[i%HOA.length][3]}" stroke="#3FA34D" stroke-width="3"/></g>`:''}${gd===0?'<ellipse cx="100" cy="170" rx="11" ry="7" fill="#8A5A28"/>':''}</g>
+ <ellipse cx="100" cy="176" rx="58" ry="9" fill="#5B3A1E"/><path d="M38 172h124l-14 54h-96z" fill="#E8835A"/><rect x="32" y="162" width="136" height="18" rx="7" fill="#F29B74"/><path d="M50 180h100" stroke="#C9623B" stroke-width="3"/></svg>`}
+function vuonCard(){const v=S.vuon,n=Math.floor(v.n/TUOI_MOI_HOA),p=v.n%TUOI_MOI_HOA,con=TUOI_MOI_HOA-p,hom=v.d===today()?v.hom:0;
+ return`<section class="card vuon"><div class="vTren"><button class="vChau" id="vChau" aria-label="Chạm vào cây">${svgChau(p,n)}</button><div class="vChu"><small>Chậu cây số ${n+1}</small><h2>${TEN_GD[giaiDoan(p)]}</h2><div class="vGiot">${Array.from({length:TUOI_MOI_NGAY},(_,k)=>`<i class="${k<hom?'':'can'}">💧</i>`).join('')}</div><small>${hom>=TUOI_MOI_NGAY?'Hôm nay cây đã đủ nước':`Hôm nay tưới ${hom}/${TUOI_MOI_NGAY} lượt`}</small><div class="bar"><i style="width:${p/TUOI_MOI_HOA*100}%"></i></div><small>Còn ${con} lượt nữa là nở hoa</small></div></div>
+ ${n?`<div class="vHoa"><small>Vườn hoa của bạn: ${n} bông</small><div>${Array.from({length:n},(_,k)=>`<button class="vB" data-i="${k}" aria-label="${HOA[k%HOA.length][2]}"><svg viewBox="-55 -55 110 110">${svgHoa(k)}</svg></button>`).join('')}</div></div>`:'<small class="mut">Mỗi lần xong một màn, một trò hay một đề là một lượt tưới.</small>'}</section>`}
+function bindVuon(){const c=$('#vChau');if(c)c.onclick=()=>{c.classList.remove('lay');void c.offsetWidth;c.classList.add('lay');sfx.pop()};$$('.vB').forEach(b=>b.onclick=()=>moHoa(+b.dataset.i,false))}
+function moHoa(i,moi=true){const[z,p,v]=HOA[i%HOA.length];const b=sheet(`<div class="lvDlg">${moi?'<div class="lvSo" style="--k:#12B76A">Hoa đã nở!</div>':''}<svg class="hoaTo" viewBox="-60 -60 120 120">${svgHoa(i,1,'noHoa')}</svg><span class="zh" style="font-size:40px;line-height:1.1">${z}</span><span class="py" style="font-size:19px">${p}</span><h2>${v}</h2><div class="two" style="width:100%"><button class="btn alt" id="hNghe">🔊 Nghe tên hoa</button><button class="btn" id="hXong">${moi?'Trồng chậu mới':'Đóng'}</button></div></div>`);b.classList.add('giua');say(z);if(moi){sfx.win();confetti(120)}b.querySelector('#hNghe').onclick=()=>say(z);b.querySelector('#hXong').onclick=()=>b.remove()}
+function tuoiCay(){const v=S.vuon;if(v.d!==today()){v.d=today();v.hom=0}if(v.hom>=TUOI_MOI_NGAY)return null;v.hom++;v.n++;save();const no=v.n%TUOI_MOI_HOA===0;if(no)setTimeout(()=>moHoa(v.n/TUOI_MOI_HOA-1),1500);return{no,p:v.n%TUOI_MOI_HOA}}
+
 /* ===== Điều hướng ===== */
 let cur='map';
 function go(v){cur=v;$$('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));({today:vToday,map:vMap,games:vGames,exam:vExam,words:vWords,plan:vPlan})[v]();scrollTo(0,0);if(v==='map'){const n=$('.node.ht')||$('.node');if(n)n.scrollIntoView({block:'center'})}}
@@ -94,10 +111,10 @@ function vMap(){const curL=LEVELS.find(l=>!S.stars[l.id]);let h='';
   ${Array.from({length:6},(_,i)=>`<span class="deco" style="left:${i%2?4+i:84-i}%;top:${8+i*16}%;animation-delay:-${i}s">${dc[i%3]}</span>`).join('')}
   ${ns.map((n,i)=>{const op=isOpen(n),st=S.stars[n.id]||0,K=KINDS[n.k],me=curL&&n.id===curL.id;return`<div class="node n-${n.k} ${op?'':'khoa'} ${me?'ht':''}" style="left:${pts[i][0]}%;top:${pts[i][1]}px;${K?`--k:${K.c};--kD:${K.d}`:''}"><button data-n="${n.id}" aria-label="Màn ${n.no}: ${n.n}"><b>${n.k==='boss'||n.k==='game'?n.e:n.no}</b></button><em>${[1,2,3].map(x=>`<i class="${x<=st?'':'t'}">★</i>`).join('')}</em>${me?'<i class="me">🐼</i>':''}</div>`}).join('')}</div>
   </section>`});
- const side=reviewBox()+todayCard()+questCard();
- render(`<div class="mapGrid"><aside class="cotBen">${side}</aside><div class="cotDuong">${h}<div class="ketDuong">🏆 Còn nhiều màn mới đang được thêm</div></div></div>`);bindToday();
+ const side=reviewBox()+vuonCard()+todayCard()+questCard();
+ render(`<div class="mapGrid"><aside class="cotBen">${side}</aside><div class="cotDuong">${h}<div class="ketDuong">🏆 Còn nhiều màn mới đang được thêm</div></div></div>`);bindToday();bindVuon();
  $$('.node button').forEach(b=>b.onclick=()=>{const l=LEVELS.find(x=>x.id===b.dataset.n);if(!isOpen(l)){sfx.bad();toast('Qua màn trước để mở màn này');return}sfx.tap();openDlg(l)})}
-function vToday(){render(`${reviewBox()}${todayCard()}${questCard()}<button class="btn alt full" onclick="go('plan')">🧭 Xem đề cương học</button>`);bindToday()}
+function vToday(){render(`${reviewBox()}${vuonCard()}${todayCard()}${questCard()}<button class="btn alt full" onclick="go('plan')">🧭 Xem đề cương học</button>`);bindToday();bindVuon()}
 function openDlg(l){const K=KINDS[l.k],st=S.stars[l.id]||0,b=sheet(`<div class="lvDlg" style="--k:${K?K.c:l.W.c}"><div class="lvSo">Màn ${l.no}</div><div class="stars" style="font-size:38px">${[1,2,3].map(i=>`<span class="${i<=st?'':'tat'}">⭐</span>`).join('')}</div><h2>${l.n}</h2>${K?`<p class="mut lvK">${K.e} ${K.n}</p><div class="lvHD">${kichBan(l).map(a=>`<span>${TEN_HD[a]}</span>`).join('')}</div><div class="lvTu">${l.ws.map(w=>`<span><b class="zh">${w.h}</b>${w.v}</span>`).join('')}</div>`:`<p class="mut">${l.k==='boss'?'Đánh bại trùm bằng tất cả từ trong thế giới này.':'Trò chơi nằm trên đường đi, qua trò này để mở màn sau.'}</p>`}<button class="btn full" id="lvGo" style="--w:${K?K.c:l.W.c};--wD:${K?K.d:l.W.d}">▶ Chơi</button></div>`);
  b.classList.add('giua');b.querySelector('#lvGo').onclick=()=>{b.remove();l.k in KINDS?startLevel(l):l.run(l)}}
 
@@ -191,8 +208,8 @@ const stHet=document.createElement('style');stHet.textContent='@keyframes hetG{t
 /* Màn kết thúc */
 function endScreen({id,stars,lose,right,total,again,xpBase,loseMsg}){
  clearTimeout(P.timer);$('#pF').innerHTML='';$('#tWrap').innerHTML='';const ex=$('#pExtra');if(ex)ex.innerHTML='';
- const xp=Math.round(xpBase*mode().mult)+(stars*10);addXp(xp);if(id&&stars>(S.stars[id]||0)){S.stars[id]=stars;save()}
- $('#pB').className='pBody end';$('#pB').innerHTML=`<span class="emo">${lose?'🥺':'🐼'}</span><h2>${lose?'Suýt nữa thì được':stars===3?'Xuất sắc! 太厉害了':'Làm tốt lắm! 不错'}</h2><div class="stars">${[1,2,3].map(i=>`<span class="${i<=stars?'':'tat'}">⭐</span>`).join('')}</div>${lose?`<p class="mut">${loseMsg}</p>`:''}<div class="nums"><div><b id="eXp">0</b>Điểm</div><div><b>${right}/${total}</b>Đúng ngay</div><div><b>${mode().e}</b>${mode().n}</div></div>${stars?`<button class="hongbao" id="hb" aria-label="Mở lì xì">🧧</button><small class="mut" id="hbT">Chạm bao lì xì để nhận thưởng</small>`:''}<div class="two" style="width:100%;max-width:340px"><button class="btn alt" id="eA">↻ Chơi lại</button><button class="btn" id="eX">${!lose&&LEVELS.some(l=>l.id===id)?'Màn tiếp ▶':'Xong'}</button></div>`;
+ const xp=Math.round(xpBase*mode().mult)+(stars*10);addXp(xp);const tc=stars?tuoiCay():null;if(id&&stars>(S.stars[id]||0)){S.stars[id]=stars;save()}
+ $('#pB').className='pBody end';$('#pB').innerHTML=`<span class="emo">${lose?'🥺':'🐼'}</span><h2>${lose?'Suýt nữa thì được':stars===3?'Xuất sắc! 太厉害了':'Làm tốt lắm! 不错'}</h2><div class="stars">${[1,2,3].map(i=>`<span class="${i<=stars?'':'tat'}">⭐</span>`).join('')}</div>${lose?`<p class="mut">${loseMsg}</p>`:''}<div class="nums"><div><b id="eXp">0</b>Điểm</div><div><b>${right}/${total}</b>Đúng ngay</div><div><b>${mode().e}</b>${mode().n}</div></div>${tc?`<div class="daTuoi">💧 ${tc.no?'Tưới xong, hoa sắp nở!':`Đã tưới cây, còn ${TUOI_MOI_HOA-tc.p} lượt nữa nở hoa`}</div>`:''}${stars?`<button class="hongbao" id="hb" aria-label="Mở lì xì">🧧</button><small class="mut" id="hbT">Chạm bao lì xì để nhận thưởng</small>`:''}<div class="two" style="width:100%;max-width:340px"><button class="btn alt" id="eA">↻ Chơi lại</button><button class="btn" id="eX">${!lose&&LEVELS.some(l=>l.id===id)?'Màn tiếp ▶':'Xong'}</button></div>`;
  $('#eX').onclick=()=>{const l=LEVELS.find(x=>x.id===id),n=l&&!lose&&LEVELS[l.i+1];closePlay();if(n)openDlg(n)};
  let n=0;const e=$('#eXp'),iv=setInterval(()=>{n=Math.min(xp,n+Math.ceil(xp/20));e.textContent=n;if(n>=xp)clearInterval(iv)},30);
  if(!lose){sfx.win();confetti()}else sfx.bad();
@@ -428,7 +445,7 @@ function runExam(e){const{F,qs}=makeExam(e);openPlay('#8E6BFF','#6B46E0');const 
   $('#eNext').onclick=()=>{sfx.tap();i<qs.length-1?(i++,view()):nop()}}
  function diem(q,a){if(q.sp)return a||0;if(q.order)return a.map(k=>q.mix[k]).join('')===q.order.join('')?1:0;return a===q.ans?1:0}
  function nop(){clearInterval(P.iv);setBar(1);$('#pH').textContent='🏁';const ps={};let sum=0;qs.forEach((q,k)=>{const d=diem(q,A[k]);sum+=d;const x=ps[q.part]=ps[q.part]||[0,0];x[0]+=d;x[1]++});
-  const pct=Math.round(sum/qs.length*100);S.exams=S.exams||{};const cu=S.exams[e.id];if(!cu||pct>=cu.pct)S.exams[e.id]={pct,ngay:today()};addXp(pct);
+  const pct=Math.round(sum/qs.length*100);S.exams=S.exams||{};const cu=S.exams[e.id];if(!cu||pct>=cu.pct)S.exams[e.id]={pct,ngay:today()};addXp(pct);if(pct>=60)tuoiCay();
   const sai=qs.map((q,k)=>[q,k]).filter(([q,k])=>diem(q,A[k])<1);
   $('#pB').innerHTML=`<div class="stage"><span class="emo">${pct>=60?'🐼':'🥺'}</span><h2>${pct}%</h2><p class="mut" style="margin:0;font-weight:700">Đúng ${sum}/${qs.length} câu, ${dmy(e.d)}. Mốc 60% là mốc tự đặt của app.</p></div><div class="card">${Object.entries(ps).map(([n,[a,b]])=>`<div class="q" style="grid-template-columns:52px 1fr auto"><span>${n}</span><span></span><span class="mut">${a}/${b}</span><div class="bar"><i style="width:${a/b*100}%"></i></div></div>`).join('')}</div>${sai.length?`<h3>Xem lại câu chưa đúng</h3><div class="cuon">${sai.map(([q,k])=>`<div class="chunk" style="background:var(--paper);border:2px solid var(--line)">${q.sp?`<span class="zh">${q.sp[5]}</span><small>${q.sp[7]}</small>`:q.order?`<span class="zh">${q.order.join('')}</span><small>${q.py}</small><small>${q.vi}</small>`:`<small>${q.text||q.py}</small><span class="zh">${q.opts[q.ans]}</span>${q.vi?`<small>${q.vi}</small>`:''}`}</div>`).join('')}</div>`:''}<div class="two"><button class="btn alt" id="eLai">↻ Làm lại</button><button class="btn" onclick="closePlay()">Xong</button></div>`;
   if(pct>=60){sfx.win();confetti()}else sfx.bad();$('#eLai').onclick=()=>runExam(e)}
