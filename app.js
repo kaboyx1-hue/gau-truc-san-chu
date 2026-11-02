@@ -282,7 +282,7 @@ const MG={
   moi();ve();P.dich=()=>t;const iv=setInterval(buoc,270);P.stop=()=>{clearInterval(iv);removeEventListener('keydown',pk)};P.sn={buoc,get sn(){return sn},get foods(){return foods},get t(){return t},dat(a,b){doi(a,b);nd=[a,b]}}},
  /* Thả lưỡi câu đúng lúc */
  fish(ws,C){const ds=nen(ws,6,w=>w.h.length<=3),W=660,H=620,G0=[W/2,40];let con=C.gon?3:4,cu=[],goc=0,tg=0,len=70,tt='lac',bat=null,t;
-  veBody(`<div class="ttl">Chạm màn hình để thả lưỡi câu, còn <b id="fL">${con}</b> con</div><div class="big" id="fT" style="text-align:center"></div><canvas id="fC" class="mgCan" width="${W}" height="${H}"></canvas>`);
+  veBody(`<div class="ttl">Chạm để thả lưỡi, chạm lần nữa để giật. Còn <b id="fL">${con}</b> con</div><div class="big" id="fT" style="text-align:center"></div><canvas id="fC" class="mgCan" width="${W}" height="${H}"></canvas>`);
   const c=$('#fC'),x=c.getContext('2d');
   const moi=()=>{t=pick(ds);const d=[t,...shuf(ds.filter(w=>w!==t)).slice(0,3)];cu=shuf(d).map((w,i)=>({w,x:Math.random()*W,y:220+i*95,v:(1.1+Math.random()*1.4)*(i%2?1:-1)}));$('#fT').textContent=t.e+' '+t.v};
   const dau=()=>[G0[0]+Math.sin(goc)*len,G0[1]+Math.cos(goc)*len];
@@ -290,9 +290,9 @@ const MG={
    cu.forEach(f=>{x.save();x.translate(f.x,f.y);x.fillStyle=(S.review||P.sang)&&f.w===t?'#FFC02E':'#FF8A5B';x.beginPath();x.ellipse(0,0,66,32,0,0,7);x.fill();const d=f.v>0?-1:1;x.beginPath();x.moveTo(d*60,0);x.lineTo(d*92,-24);x.lineTo(d*92,24);x.fill();x.fillStyle='#22314F';x.textAlign='center';x.textBaseline='middle';x.font=`700 ${f.w.h.length>2?24:30}px "Noto Sans SC",sans-serif`;x.fillText(f.w.h,0,1);x.restore()});
    const[a,b]=dau();x.strokeStyle='#22314F';x.lineWidth=4;x.beginPath();x.moveTo(...G0);x.lineTo(a,b);x.stroke();x.font='34px sans-serif';x.textAlign='center';x.fillText('🪝',a,b+8);x.font='42px sans-serif';x.fillText('🐼',G0[0],26)};
   const buoc=()=>{tg+=.045;if(tt==='lac')goc=Math.sin(tg)*1.05;cu.forEach(f=>{if(f===bat)return;f.x+=f.v;if(f.x<-90)f.x=W+90;if(f.x>W+90)f.x=-90});
-   if(tt==='tha'){len+=13;const[a,b]=dau();bat=cu.find(f=>Math.hypot(f.x-a,f.y-b)<58)||null;if(bat||a<0||a>W||b>H)tt='keo'}
+   if(tt==='tha'){len+=10;const[a,b]=dau();if(a<0||a>W||b>H)tt='keo'}
    if(tt==='keo'){len-=bat?9:14;if(bat){const[a,b]=dau();bat.x=a;bat.y=b}if(len<=70){len=70;tt='lac';if(bat){const w=bat.w;bat=null;if(w===t){C.hit(t,c);say(t.h);con--;$('#fL').textContent=con;if(con<=0){clearInterval(iv);setTimeout(C.end,350);return}}else{C.miss(w,c);toast(`${w.h} là “${w.v}”`)}moi()}}}ve()};
-  const tha=()=>{if(tt==='lac'){tt='tha';sfx.pop()}};c.addEventListener('pointerdown',tha);const pk=e=>{if(e.key===' '){e.preventDefault();tha()}};addEventListener('keydown',pk);
+  /* Lưỡi đi xuyên qua cá, chạm lần hai mới giật con đang ở lưỡi: câu được cả con nằm dưới con khác */const tha=()=>{if(tt==='lac'){tt='tha';sfx.pop()}else if(tt==='tha'){const[a,b]=dau();bat=cu.filter(f=>Math.hypot(f.x-a,f.y-b)<62).sort((m,n)=>Math.hypot(m.x-a,m.y-b)-Math.hypot(n.x-a,n.y-b))[0]||null;tt='keo';sfx.tap()}};c.addEventListener('pointerdown',tha);const pk=e=>{if(e.key===' '){e.preventDefault();tha()}};addEventListener('keydown',pk);
   moi();P.dich=()=>t;const iv=setInterval(buoc,33);P.stop=()=>{clearInterval(iv);removeEventListener('keydown',pk)};P.fi={get cu(){return cu},get t(){return t},get tt(){return tt},tha,dau}},
  /* Vuốt tìm từ trong bảng chữ */
  word(ws,C){const O=5,ds=nen(ws,C.gon?3:4,w=>w.h.length>=2&&w.h.length<=4),g=Array(O*O).fill('');
