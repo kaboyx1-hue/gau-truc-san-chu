@@ -324,5 +324,103 @@ const CHAT2=[
  n4x:['不吃药的话,好得慢一点儿。','bù chī yào dehuà, hǎo de màn yìdiǎnr.','Không uống thuốc thì sẽ khỏi chậm hơn.','n4'],
  n5:['饭后吃。','fàn hòu chī.','Uống sau bữa ăn.',[
   ['明白了,谢谢医生!','míngbai le, xièxie yīshēng!','Hiểu rồi, cảm ơn bác sĩ!','n6',1]]],
- n6:['不客气,早点儿好起来!','bú kèqi, zǎo diǎnr hǎo qǐlai!','Không có gì, mau khỏe nhé!',[]]}}];
+ n6:['不客气,早点儿好起来!','bú kèqi, zǎo diǎnr hǎo qǐlai!','Không có gì, mau khỏe nhé!',[]]}},
+{id:'hoiDuong',t:'Hỏi đường',e:'🧭',npc:'👴',muc:'Hỏi đường tới ga tàu điện ngầm, hỏi có xa không, nhắc lại hướng đi cho chắc, rồi cảm ơn.',co:{hoi:'Hỏi đường tới ga tàu',xa:'Hỏi có xa không',hieu:'Nhắc lại hướng đi cho chắc',cam:'Cảm ơn'},n:{
+ n1:['你好,有什么事吗?','nǐ hǎo, yǒu shénme shì ma?','Chào cháu, có việc gì vậy?',[
+  ['不好意思,请问地铁站怎么走?','bù hǎoyìsi, qǐngwèn dìtiě zhàn zěnme zǒu?','Xin lỗi, cho hỏi đến ga tàu điện ngầm đi thế nào ạ?','n2',1,'hoi'],
+  ['地铁站在哪儿?','dìtiě zhàn zài nǎr?','Ga tàu điện ngầm ở đâu?','n2',1,'hoi'],
+  ['我要地铁。','wǒ yào dìtiě.','Tôi muốn tàu điện ngầm.','n1x',-1]]],
+ n1x:['你是找地铁站吧?','nǐ shì zhǎo dìtiě zhàn ba?','Cháu đang tìm ga tàu điện ngầm phải không?','n1'],
+ n2:['往前走,到第二个路口往左拐,就在银行旁边。','wǎng qián zǒu, dào dì èr gè lùkǒu wǎng zuǒ guǎi, jiù zài yínháng pángbiān.','Đi thẳng, đến ngã tư thứ hai thì rẽ trái, ngay cạnh ngân hàng.',[
+  ['远不远?走路要多长时间?','yuǎn bu yuǎn? zǒulù yào duō cháng shíjiān?','Có xa không ạ? Đi bộ mất bao lâu?','n3',1,'xa'],
+  ['第二个路口往左拐,对吗?','dì èr gè lùkǒu wǎng zuǒ guǎi, duì ma?','Ngã tư thứ hai rẽ trái, đúng không ạ?','n2b',1,'hieu'],
+  ['我听不懂,您能说慢一点儿吗?','wǒ tīng bu dǒng, nín néng shuō màn yìdiǎnr ma?','Cháu nghe không hiểu, bác nói chậm chút được không ạ?','n2c',1]]],
+ n2b:['对,往左拐,别往右。','duì, wǎng zuǒ guǎi, bié wǎng yòu.','Đúng, rẽ trái, đừng rẽ phải.',[
+  ['远不远?走路要多长时间?','yuǎn bu yuǎn? zǒulù yào duō cháng shíjiān?','Có xa không ạ? Đi bộ mất bao lâu?','n3',1,'xa'],
+  ['谢谢您!','xièxie nín!','Cảm ơn bác!','n4',1,'cam']]],
+ n2c:['好的。一直往前走,第二个路口,左边。','hǎo de. yìzhí wǎng qián zǒu, dì èr gè lùkǒu, zuǒbian.','Được. Cứ đi thẳng, ngã tư thứ hai, bên trái.','n2'],
+ n3:['不远,走路大概十分钟。','bù yuǎn, zǒulù dàgài shí fēnzhōng.','Không xa, đi bộ khoảng mười phút.',[
+  ['第二个路口往左拐,对吗?','dì èr gè lùkǒu wǎng zuǒ guǎi, duì ma?','Ngã tư thứ hai rẽ trái, đúng không ạ?','n3b',1,'hieu'],
+  ['太好了,谢谢您!','tài hǎo le, xièxie nín!','Tốt quá, cảm ơn bác!','n4',1,'cam'],
+  ['十分钟太远了,我不去了。','shí fēnzhōng tài yuǎn le, wǒ bú qù le.','Mười phút xa quá, cháu không đi nữa.','n3x',0]]],
+ n3b:['对,很好找的。','duì, hěn hǎo zhǎo de.','Đúng rồi, dễ tìm lắm.',[
+  ['太好了,谢谢您!','tài hǎo le, xièxie nín!','Tốt quá, cảm ơn bác!','n4',1,'cam']]],
+ n3x:['哈哈,年轻人,走走路对身体好。','hāhā, niánqīngrén, zǒuzou lù duì shēntǐ hǎo.','Haha, người trẻ đi bộ chút tốt cho sức khỏe.','n3'],
+ n4:['不客气,路上小心!','bú kèqi, lùshang xiǎoxīn!','Không có gì, đi đường cẩn thận nhé!',[]]}},
+{id:'goiMon',t:'Gọi đồ ăn giao tận nhà',e:'🛵',npc:'📞',muc:'Gọi điện đặt 2 bát mì bò, dặn không cay, đọc địa chỉ, hỏi bao lâu thì giao tới.',co:{mon:'Gọi 2 bát mì bò',cay:'Dặn không cay',dc:'Đọc địa chỉ',lau:'Hỏi bao lâu thì tới'},n:{
+ n1:['喂,你好,这里是老王面馆。','wéi, nǐ hǎo, zhèlǐ shì Lǎo Wáng miànguǎn.','A lô, xin chào, đây là quán mì Lão Vương.',[
+  ['你好,我想点外卖。','nǐ hǎo, wǒ xiǎng diǎn wàimài.','Chào chị, tôi muốn đặt đồ ăn giao tới.','n2',1],
+  ['你好,我要两碗牛肉面。','nǐ hǎo, wǒ yào liǎng wǎn niúròu miàn.','Chào chị, cho tôi hai bát mì bò.','n3',1,'mon'],
+  ['你是谁?','nǐ shì shéi?','Chị là ai?','n1x',-1]]],
+ n1x:['我是老王面馆的,您要点菜吗?','wǒ shì Lǎo Wáng miànguǎn de, nín yào diǎn cài ma?','Tôi ở quán mì Lão Vương, anh chị muốn gọi món không?','n1'],
+ n2:['好的,您要点什么?','hǎo de, nín yào diǎn shénme?','Vâng, anh chị muốn gọi gì?',[
+  ['两碗牛肉面。','liǎng wǎn niúròu miàn.','Hai bát mì bò.','n3',1,'mon'],
+  ['你们有什么面?','nǐmen yǒu shénme miàn?','Quán có những loại mì nào?','n2b',1]]],
+ n2b:['有牛肉面、鸡蛋面,还有炸酱面。','yǒu niúròu miàn, jīdàn miàn, hái yǒu zhájiàng miàn.','Có mì bò, mì trứng, còn có mì tương đen.','n2'],
+ n3:['要辣的吗?','yào là de ma?','Có lấy cay không?',[
+  ['不要辣的,谢谢。','bú yào là de, xièxie.','Không cay, cảm ơn.','n4',1,'cay'],
+  ['微辣吧。','wēi là ba.','Cay nhẹ thôi.','n4',0],
+  ['我不是辣的。','wǒ bú shì là de.','Tôi không phải đồ cay.','n3x',-1]]],
+ n3x:['哈哈,我是问面里放不放辣椒。','hāhā, wǒ shì wèn miàn lǐ fàng bu fàng làjiāo.','Haha, tôi hỏi trong mì có cho ớt không.','n3'],
+ n4:['好的。地址是哪里?','hǎo de. dìzhǐ shì nǎlǐ?','Vâng. Địa chỉ ở đâu ạ?',[
+  ['阳光小区三号楼五零二。','Yángguāng xiǎoqū sān hào lóu wǔ líng èr.','Khu Dương Quang, tòa số 3, phòng 502.','n5',1,'dc'],
+  ['我在家。','wǒ zài jiā.','Tôi ở nhà.','n4x',-1]]],
+ n4x:['您家在哪儿呢?请说一下小区和门牌号。','nín jiā zài nǎr ne? qǐng shuō yíxià xiǎoqū hé ménpái hào.','Nhà anh chị ở đâu? Xin nói tên khu và số nhà.','n4'],
+ n5:['好的,一共四十八块,到了给您打电话。','hǎo de, yígòng sìshíbā kuài, dào le gěi nín dǎ diànhuà.','Vâng, tổng 48 tệ, tới nơi sẽ gọi điện cho anh chị.',[
+  ['大概要多长时间?','dàgài yào duō cháng shíjiān?','Khoảng bao lâu thì tới?','n6',1,'lau'],
+  ['好的,谢谢!','hǎo de, xièxie!','Được, cảm ơn!','n7',0]]],
+ n6:['半个小时左右。','bàn gè xiǎoshí zuǒyòu.','Khoảng nửa tiếng.',[
+  ['好的,谢谢,我等你们。','hǎo de, xièxie, wǒ děng nǐmen.','Được, cảm ơn, tôi chờ.','n7',1]]],
+ n7:['好的,再见!','hǎo de, zàijiàn!','Vâng, chào anh chị!',[]]}},
+{id:'xinNghi',t:'Xin nghỉ phép',e:'💼',npc:'👨‍💼',muc:'Xin giám đốc cho nghỉ thứ Sáu, nói lý do, hứa làm xong báo cáo trước, và cho biết ai làm thay.',co:{xin:'Xin nghỉ thứ Sáu',lydo:'Nói lý do',xong:'Hứa làm xong việc trước',giao:'Nhờ đồng nghiệp làm thay'},n:{
+ n1:['小林,有什么事吗?','Xiǎo Lín, yǒu shénme shì ma?','Tiểu Lâm, có chuyện gì vậy?',[
+  ['王经理,我想请一天假。','Wáng jīnglǐ, wǒ xiǎng qǐng yì tiān jià.','Giám đốc Vương, tôi muốn xin nghỉ một ngày.','n2',1],
+  ['经理,我明天不来了。','jīnglǐ, wǒ míngtiān bù lái le.','Giám đốc, mai tôi không đến nữa.','n1x',-1]]],
+ n1x:['啊?不来了?你是要请假吗?','á? bù lái le? nǐ shì yào qǐngjià ma?','Hả? Không đến nữa? Em muốn xin nghỉ à?','n1'],
+ n2:['哪天?','nǎ tiān?','Ngày nào?',[
+  ['这个星期五。','zhège xīngqīwǔ.','Thứ Sáu tuần này.','n3',1,'xin'],
+  ['不知道。','bù zhīdào.','Không biết.','n2x',-1]]],
+ n2x:['那你想好了再来找我吧。','nà nǐ xiǎng hǎo le zài lái zhǎo wǒ ba.','Vậy em nghĩ kỹ rồi hãy tới gặp tôi.','n2'],
+ n3:['有什么事吗?','yǒu shénme shì ma?','Có việc gì à?',[
+  ['我妈妈来看我,我想去机场接她。','wǒ māma lái kàn wǒ, wǒ xiǎng qù jīchǎng jiē tā.','Mẹ tôi sang thăm, tôi muốn ra sân bay đón mẹ.','n4',1,'lydo'],
+  ['我有点儿不舒服,想去医院看看。','wǒ yǒudiǎnr bù shūfu, xiǎng qù yīyuàn kànkan.','Tôi hơi mệt, muốn đi bệnh viện khám.','n4',1,'lydo'],
+  ['我想休息。','wǒ xiǎng xiūxi.','Tôi muốn nghỉ ngơi.','n3x',0]]],
+ n3x:['大家都想休息啊。有什么特别的事吗?','dàjiā dōu xiǎng xiūxi a. yǒu shénme tèbié de shì ma?','Ai cũng muốn nghỉ mà. Có việc gì đặc biệt không?','n3'],
+ n4:['好吧。那个报告怎么办?','hǎo ba. nàge bàogào zěnme bàn?','Được thôi. Còn bản báo cáo kia thì sao?',[
+  ['我星期四下班前会完成。','wǒ xīngqīsì xiàbān qián huì wánchéng.','Tôi sẽ làm xong trước khi tan làm thứ Năm.','n5',1,'xong'],
+  ['我不知道怎么办。','wǒ bù zhīdào zěnme bàn.','Tôi không biết làm sao.','n4x',-1]]],
+ n4x:['那可不行,工作要先安排好。','nà kě bù xíng, gōngzuò yào xiān ānpái hǎo.','Vậy không được, công việc phải sắp xếp xong trước.','n4'],
+ n5:['星期五要是有客人找你呢?','xīngqīwǔ yàoshi yǒu kèrén zhǎo nǐ ne?','Thứ Sáu nếu có khách tìm em thì sao?',[
+  ['我已经跟小张说好了,她会帮我。','wǒ yǐjīng gēn Xiǎo Zhāng shuō hǎo le, tā huì bāng wǒ.','Tôi đã nói với Tiểu Trương rồi, cô ấy sẽ giúp tôi.','n6',1,'giao'],
+  ['让他们星期一再来吧。','ràng tāmen xīngqīyī zài lái ba.','Để họ thứ Hai hãy tới.','n6',0]]],
+ n6:['好,我同意了。记得在系统里写请假单。','hǎo, wǒ tóngyì le. jìde zài xìtǒng lǐ xiě qǐngjià dān.','Được, tôi đồng ý. Nhớ viết đơn xin nghỉ trên hệ thống.',[
+  ['好的,谢谢王经理!','hǎo de, xièxie Wáng jīnglǐ!','Vâng, cảm ơn giám đốc Vương!','n7',1]]],
+ n7:['不客气,路上注意安全。','bú kèqi, lùshang zhùyì ānquán.','Không có gì, đi đường chú ý an toàn.',[]]}},
+{id:'sieuThi',t:'Đi siêu thị',e:'🛒',npc:'👩‍💼',muc:'Hỏi chỗ bán sữa, hỏi giá, trả lời chuyện thẻ thành viên và túi đựng, rồi chọn cách trả tiền.',co:{tim:'Hỏi chỗ bán sữa',gia:'Hỏi giá',the:'Trả lời chuyện thẻ thành viên',tui:'Trả lời chuyện túi đựng'},n:{
+ n1:['您好,需要帮忙吗?','nín hǎo, xūyào bāngmáng ma?','Chào bạn, cần giúp gì không?',[
+  ['请问,牛奶在哪儿?','qǐngwèn, niúnǎi zài nǎr?','Cho hỏi, sữa ở đâu?','n2',1,'tim'],
+  ['不用,我随便看看。','búyòng, wǒ suíbiàn kànkan.','Không cần, tôi xem chút thôi.','n1b',0],
+  ['我要帮忙。','wǒ yào bāngmáng.','Tôi muốn giúp đỡ.','n1x',-1]]],
+ n1b:['好的,有事叫我。','hǎo de, yǒu shì jiào wǒ.','Được, có gì cứ gọi tôi.',[
+  ['不好意思,牛奶在哪儿?','bù hǎoyìsi, niúnǎi zài nǎr?','Xin lỗi, sữa ở đâu vậy?','n2',1,'tim']]],
+ n1x:['您是想让我帮您找东西吗?','nín shì xiǎng ràng wǒ bāng nín zhǎo dōngxi ma?','Bạn muốn tôi giúp tìm đồ phải không?','n1'],
+ n2:['在后面,冰箱旁边。今天牛奶买一送一。','zài hòumiàn, bīngxiāng pángbiān. jīntiān niúnǎi mǎi yī sòng yī.','Ở phía sau, cạnh tủ lạnh. Hôm nay sữa mua một tặng một.',[
+  ['真的吗?一盒多少钱?','zhēn de ma? yì hé duōshao qián?','Thật à? Một hộp bao nhiêu tiền?','n3',1,'gia'],
+  ['好的,谢谢。','hǎo de, xièxie.','Được, cảm ơn.','n4',0]]],
+ n3:['十五块一盒,买两盒也是十五块。','shíwǔ kuài yì hé, mǎi liǎng hé yě shì shíwǔ kuài.','Mười lăm tệ một hộp, mua hai hộp cũng là mười lăm tệ.',[
+  ['太好了,我要两盒。','tài hǎo le, wǒ yào liǎng hé.','Tốt quá, tôi lấy hai hộp.','n4',1]]],
+ n4:['您有会员卡吗?','nín yǒu huìyuán kǎ ma?','Bạn có thẻ thành viên không?',[
+  ['没有,不用了,谢谢。','méiyǒu, búyòng le, xièxie.','Không có, không cần đâu, cảm ơn.','n5',1,'the'],
+  ['有,给你。','yǒu, gěi nǐ.','Có, đây ạ.','n5',1,'the'],
+  ['我没有卡车。','wǒ méiyǒu kǎchē.','Tôi không có xe tải.','n4x',-1]]],
+ n4x:['哈哈,不是卡车,是会员卡。','hāhā, bú shì kǎchē, shì huìyuán kǎ.','Haha, không phải xe tải, là thẻ thành viên.','n4'],
+ n5:['要袋子吗?一个三毛。','yào dàizi ma? yí gè sān máo.','Có lấy túi không? Một cái ba hào.',[
+  ['要一个,谢谢。','yào yí gè, xièxie.','Lấy một cái, cảm ơn.','n6',1,'tui'],
+  ['不要,我自己带了。','bú yào, wǒ zìjǐ dài le.','Không cần, tôi tự mang rồi.','n6',1,'tui'],
+  ['我不是袋子。','wǒ bú shì dàizi.','Tôi không phải cái túi.','n5x',-1]]],
+ n5x:['哈哈,我是问您要不要买袋子装东西。','hāhā, wǒ shì wèn nín yào bu yào mǎi dàizi zhuāng dōngxi.','Haha, tôi hỏi bạn có mua túi để đựng đồ không.','n5'],
+ n6:['好的。扫码还是现金?','hǎo de. sǎomǎ háishi xiànjīn?','Được. Quét mã hay tiền mặt?',[
+  ['扫码。','sǎomǎ.','Quét mã.','n7',1],
+  ['现金。','xiànjīn.','Tiền mặt.','n7',1]]],
+ n7:['好了,谢谢光临!','hǎo le, xièxie guānglín!','Xong rồi, cảm ơn quý khách!',[]]}}];
 const LV={"丈夫":2,"妻子":2,"孩子":1,"哥哥":1,"姐姐":1,"弟弟":1,"妹妹":1,"朋友":1,"起床":1,"洗澡":3,"穿":1,"跑步":2,"锻炼":3,"跳舞":2,"休息":1,"旅游":2,"高兴":1,"累":2,"忙":1,"便宜":1,"贵":1,"远":2,"近":2,"快":2,"牛奶":1,"鸡蛋":1,"方便面":3,"西瓜":3,"蛋糕":3,"啤酒":3,"奶茶":2,"甜":3,"菜单":3,"饱":3,"筷子":3,"碗":3,"饿":3,"渴":3,"外卖":3,"请客":3,"超市":1,"裙子":3,"衬衫":3,"鞋":3,"换":3,"试":3,"信用卡":3,"合适":3,"地铁":2,"司机":3,"机场":2,"高铁":3,"护照":3,"行李":3,"迟到":3,"晚点":3,"附近":3,"左边":2,"右边":2,"旁边":2,"地图":3,"过":2,"楼":2,"电梯":3,"银行":3,"公园":3,"图书馆":3,"医院":1,"凉快":3,"季节":3,"晴":2,"伞":3,"作业":3,"考试":2,"成绩":3,"练习":3,"复习":3,"词典":3,"句子":3,"水平":3,"经理":3,"同事":3,"办公室":3,"会议":3,"开会":3,"请假":3,"休假":3,"邮件":3,"准备":2,"检查":3,"解决":3,"完成":3,"提高":3,"决定":3,"帮忙":2,"发现":3,"担心":3,"害怕":3,"生气":3,"着急":3,"难过":3,"满意":3,"相信":3,"关心":3,"差不多":3,"不好意思":2,"怎么办":3,"聊天儿":3,"拍照":3};

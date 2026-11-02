@@ -1,5 +1,5 @@
 // Mo duoc khi mat mang. Co mang thi lay ban moi; mang yeu qua 2,5 giay thi dung ban da luu.
-const KHO = 'gt-5';
+const KHO = 'gt-6';
 const TEP = ['./', 'style.css', 'data.js', 'app.js', 'apps-script/Gop.js', 'audio.json', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {

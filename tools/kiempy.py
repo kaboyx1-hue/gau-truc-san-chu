@@ -12,9 +12,15 @@ def tron(s):
 def thanh(s):
     return next((DAU[c] for c in s if c in DAU), 0)
 
+# Cach doc dung ma tu dien tu dong hay chon sai: 长 trong 多长时间, 谁 khau ngu, 喂 khi nghe dien thoai
+DUNG = {'长': ['cháng'], '谁': ['shéi'], '喂': ['wéi']}
+
 def kiem(zh, py, ten):
     han = HAN.sub('', zh)
     goc = lazy_pinyin(han, style=Style.TONE)
+    thu = [DUNG[c][0] if c in DUNG else g for c, g in zip(han, goc)]
+    if tron(''.join(thu)) == tron(py).replace('r', '') or tron(''.join(thu)).replace('r', '') == tron(py).replace('r', ''):
+        goc = thu
     # 儿 sau chu khac doc dinh vao am truoc (一点儿 = yidianr), khong phai mot am "er" rieng
     chuan = ''.join('r' if c == '儿' and i else p for i, (c, p) in enumerate(zip(han, goc)))
     if tron(py).replace('r', '') != tron(chuan).replace('r', ''):
@@ -29,7 +35,7 @@ def kiem(zh, py, ten):
             continue
         n = len(tron(goc[k]))
         am = ''.join(chu[i:i + n]); i += n
-        doc = pinyin(c, style=Style.TONE, heteronym=True)[0]
+        doc = pinyin(c, style=Style.TONE, heteronym=True)[0] + DUNG.get(c, [])
         t = thanh(am)
         # Bien am cua 一/不 va thanh nhe o am sau la cach doc dung, khong bao loi
         if t in {thanh(p) for p in doc} or c in '一不' or (t == 0 and k > 0):
@@ -44,4 +50,8 @@ if __name__ == '__main__':
     assert kiem('不客气', 'bú kèqi', 'x') == []
     assert kiem('行李', 'xíngli', 'x') == []
     assert kiem('冰箱', 'bìngxiāng', 'x'), 'phai bat duoc sai thanh'
+    assert kiem('多长时间', 'duō cháng shíjiān', 'x') == []
+    assert kiem('你是谁', 'nǐ shì shéi', 'x') == []
+    assert kiem('喂', 'wéi', 'x') == []
+    assert kiem('长大', 'zhǎngdà', 'x') == []
     print('kiempy dung')
