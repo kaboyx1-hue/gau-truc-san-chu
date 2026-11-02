@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Gấu Trúc Săn Chữ</title>
+<meta name="theme-color" content="#12B76A">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;700;800&family=Noto+Sans+SC:wght@500;700&family=ZCOOL+KuaiLe&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>body{margin:0}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+<div id="bg"></div>
+<header id="top"><div class="topIn">
+  <div class="logo"><i>🐼</i><span>Săn Chữ</span></div>
+  <div class="stat fire" title="Chuỗi ngày học">🔥<span id="sStreak">0</span></div>
+  <div class="stat" title="Điểm">⭐<span id="sXp">0</span></div>
+  <button class="modeBtn" id="bMode" aria-label="Đổi chế độ học"></button>
+  <button class="mini" id="bSound" aria-label="Bật tắt âm thanh">🔊</button>
+</div></header>
+<main id="main"></main>
+<nav id="nav"><div>
+  <button data-v="today"><b>🌞</b>Hôm nay</button>
+  <button data-v="map"><b>🗺️</b>Bản đồ</button>
+  <button data-v="games"><b>🎮</b>Trò chơi</button>
+  <button data-v="exam"><b>📝</b>Phòng thi</button>
+  <button data-v="words"><b>📒</b>Sổ từ</button>
+</div></nav>
+<div id="play" hidden></div>
+<canvas id="fx"></canvas>
+<div id="toast" hidden></div>
+
+<script src="data.js"></script>
+<script src="apps-script/Gop.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+# Dia chi va khoa rieng, khong bao gio dua len repo cong khai
+.clasp.json
+LINK-RIENG.txt
+__pycache__/
+tools/pydeps/
+tools/am/
+tools/tam/
