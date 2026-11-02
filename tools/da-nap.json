@@ -1,0 +1,59 @@
+[
+ {
+  "id": "bai-2026-11-02-a",
+  "loai": "bai",
+  "data": {
+   "t": "Sức khỏe",
+   "e": "🩺",
+   "w": "感冒|gǎnmào|bị cảm|🤧|我感冒了|wǒ gǎnmào le|Tôi bị cảm rồi\n发烧|fāshāo|sốt|🤒|有点儿发烧|yǒudiǎnr fāshāo|Hơi sốt\n健康|jiànkāng|khỏe mạnh|💪|身体健康|shēntǐ jiànkāng|Sức khỏe tốt\n住院|zhùyuàn|nằm viện|🏥|他住院了|tā zhùyuàn le|Anh ấy nằm viện rồi\n药|yào|thuốc|💊|吃药|chī yào|Uống thuốc\n舒服|shūfu|dễ chịu|😌|不太舒服|bú tài shūfu|Không khỏe lắm\n小心|xiǎoxīn|cẩn thận|⚠️|小心一点儿|xiǎoxīn yìdiǎnr|Cẩn thận chút\n放心|fàngxīn|yên tâm|🙏|你放心吧|nǐ fàngxīn ba|Bạn yên tâm đi",
+   "lv": {
+    "感冒": 3,
+    "发烧": 3,
+    "健康": 3,
+    "住院": 3,
+    "药": 2,
+    "舒服": 2,
+    "小心": 3,
+    "放心": 3
+   }
+  }
+ },
+ {
+  "id": "bai-2026-11-02-b",
+  "loai": "bai",
+  "data": {
+   "t": "Việc nhà",
+   "e": "🧹",
+   "w": "打扫|dǎsǎo|quét dọn|🧹|打扫房间|dǎsǎo fángjiān|Dọn phòng\n干净|gānjìng|sạch|✨|很干净|hěn gānjìng|Rất sạch\n脏|zāng|bẩn|🧦|衣服脏了|yīfu zāng le|Quần áo bẩn rồi\n冰箱|bīngxiāng|tủ lạnh|🧊|放冰箱里|fàng bīngxiāng lǐ|Cho vào tủ lạnh\n空调|kōngtiáo|điều hòa|❄️|开空调|kāi kōngtiáo|Bật điều hòa\n洗衣机|xǐyījī|máy giặt|🫧|用洗衣机洗|yòng xǐyījī xǐ|Giặt bằng máy\n沙发|shāfā|ghế sofa|🛋️|坐在沙发上|zuò zài shāfā shang|Ngồi trên sofa\n搬家|bānjiā|chuyển nhà|📦|下个月搬家|xià ge yuè bānjiā|Tháng sau chuyển nhà",
+   "lv": {
+    "打扫": 3,
+    "干净": 3,
+    "脏": 3,
+    "冰箱": 3,
+    "空调": 3,
+    "洗衣机": 3,
+    "沙发": 3,
+    "搬家": 3
+   }
+  }
+ },
+ {
+  "id": "bai-2026-11-02-c",
+  "loai": "bai",
+  "data": {
+   "t": "Lễ tết và bốn mùa",
+   "e": "🎉",
+   "w": "节日|jiérì|ngày lễ|🎊|节日快乐|jiérì kuàilè|Chúc ngày lễ vui\n新年|xīnnián|năm mới|🧧|新年快乐|xīnnián kuàilè|Chúc mừng năm mới\n礼物|lǐwù|quà|🎁|送你一个礼物|sòng nǐ yí gè lǐwù|Tặng bạn một món quà\n照片|zhàopiàn|tấm ảnh|🖼️|一张照片|yì zhāng zhàopiàn|Một tấm ảnh\n春天|chūntiān|mùa xuân|🌸|春天来了|chūntiān lái le|Mùa xuân đến rồi\n夏天|xiàtiān|mùa hè|🏖️|夏天很热|xiàtiān hěn rè|Mùa hè rất nóng\n冬天|dōngtiān|mùa đông|⛄|冬天很冷|dōngtiān hěn lěng|Mùa đông rất lạnh\n结婚|jiéhūn|kết hôn|💍|我们结婚了|wǒmen jiéhūn le|Chúng tôi kết hôn rồi",
+   "lv": {
+    "节日": 3,
+    "新年": 3,
+    "礼物": 3,
+    "照片": 3,
+    "春天": 3,
+    "夏天": 3,
+    "冬天": 3,
+    "结婚": 3
+   }
+  }
+ }
+]
