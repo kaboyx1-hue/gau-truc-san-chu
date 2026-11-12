@@ -58,9 +58,12 @@ function pyHtml(p){if(!p)return'';const m=mode().py;if(S.review||m===true)return
 const viAn=v=>!v||P.thi?'':S.review?`<small class="viMo">${v}</small>`:`<button class="viAn" onclick="event.stopPropagation();this.classList.add('mo');sfx.pop()" aria-label="Xem nghĩa">💡<span>${v}</span></button>`;
 const showVi=()=>S.review||S.mode!=='king';
 
-function syncTop(){$('#sXp').textContent=S.xp;$('#sStreak').textContent=S.streak;$('#bMode').textContent=mode().e+' '+mode().n;$('#bSound').textContent=S.sound?'🔊':'🔇'}
-function addXp(n){S.xp+=n;if(S.last!==today()){S.streak=S.last?S.streak+1:S.streak;S.last=today()}save();syncTop()}
-function learnWord(h,ok){S.box[h]=ok?Math.min(3,(S.box[h]||0)+1):0;S.boxT[h]=Date.now();save()}
+function syncTop(){$('#sXp').textContent=S.xp;$('#sStreak').textContent=HOC.chuoiHienTai(S.streak,S.last,today());$('#bMode').textContent=mode().e+' '+mode().n;$('#bSound').textContent=S.sound?'🔊':'🔇'}
+function addXp(n){S.xp+=n;if(S.last!==today()){S.streak=HOC.chuoiMoi(S.last,S.streak,today());S.last=today()}save();syncTop()}
+/* Bậc nhớ chỉ lên khi đến hạn (sau 1, 3, 7 ngày), làm đi làm lại trong một buổi không tính. Xem hoc.js */
+const ngayCua=t=>t?new Date(t).toLocaleDateString('sv'):'';
+function learnWord(h,ok){const r=HOC.capNhat(S.box[h]||0,ngayCua(S.boxT[h]),today(),ok);if(r.doi){S.box[h]=r.bac;S.boxT[h]=Date.now()}save()}
+const uuTien=w=>{const b=S.box[w.h]||0;return HOC.denHan(b,ngayCua(S.boxT[w.h]),today())?b:b+4};
 
 /* ===== Chậu cây: mỗi lần hoàn thành bài là một lượt tưới, đủ lượt thì nở một loài hoa mới ===== */
 const TUOI_MOI_HOA=16,TUOI_MOI_NGAY=5,MOC=[3,7,12];
@@ -82,8 +85,7 @@ function tuoiCay(){const v=S.vuon;if(v.d!==today()){v.d=today();v.hom=0}if(v.hom
 /* ===== Nói vào micro: máy nghe rồi chấm theo từng chữ. Trình duyệt không nghe được thì ghi âm để tự nghe lại ===== */
 const NHAN=window.SpeechRecognition||window.webkitSpeechRecognition;
 const hanzi=s=>String(s||'').replace(/[^\u4e00-\u9fff]/g,'');
-function soKhop(dich,noi){const a=hanzi(dich),b=hanzi(noi),m=a.length,n=b.length;if(!m||!n)return{p:0,trung:new Set};const d=Array.from({length:m+1},()=>new Array(n+1).fill(0));
- for(let i=m-1;i>=0;i--)for(let j=n-1;j>=0;j--)d[i][j]=a[i]===b[j]?d[i+1][j+1]+1:Math.max(d[i+1][j],d[i][j+1]);const trung=new Set;let i=0,j=0;while(i<m&&j<n){if(a[i]===b[j]){trung.add(i);i++;j++}else if(d[i+1][j]>=d[i][j+1])i++;else j++}return{p:2*d[0][0]/(m+n),trung}}
+const soKhop=HOC.soKhop;
 const LOI_MIC={'not-allowed':'Chưa cho phép dùng micro. Bấm biểu tượng ổ khoá cạnh địa chỉ trang để cho phép.','service-not-allowed':'Trình duyệt này chặn nhận giọng nói.','no-speech':'Chưa nghe thấy tiếng, thử nói to và gần micro hơn.','network':'Cần có mạng để máy nghe được.','audio-capture':'Không tìm thấy micro.'};
 function nghe(){return new Promise(ok=>{const r=new NHAN();r.lang='zh-CN';r.maxAlternatives=4;r.interimResults=false;let xong=0;const het=v=>{if(!xong){xong=1;ok(v)}};
  r.onresult=e=>het({ds:[...e.results[0]].map(x=>x.transcript)});r.onerror=e=>het({loi:e.error});r.onend=()=>het({ds:[]});P.dungNghe=()=>{try{r.stop()}catch(e){}};try{r.start()}catch(e){het({loi:'start'})}setTimeout(()=>{try{r.stop()}catch(e){}},9000)})}
@@ -160,7 +162,7 @@ function vMap(){const curL=LEVELS.find(l=>!S.stars[l.id]);let h='';
  WORLDS.forEach(W=>{const ns=LEVELS.filter(l=>l.W===W),rh=88,H=ns.length*rh+40;
   const pts=ns.map((n,i)=>[50+30*Math.sin(i*.95),i*rh+56]);
   let d=`M${pts[0][0]} ${pts[0][1]}`;for(let i=1;i<pts.length;i++){const[a,b]=pts[i-1],[x,y]=pts[i];d+=` C${a} ${b+44} ${x} ${y-44} ${x} ${y}`}
-  const dc=DECOR[W.id];
+  const dc=DECOR[W.id]||['🌟','📖','🎐'];
   h+=`<section class="ep" style="--w:${W.c};--wD:${W.d}"><div class="wHead"><b>${W.e}</b><div><h2>${W.name}</h2><small>${W.cap}. Màn ${ns[0].no}–${ns[ns.length-1].no}</small></div><span class="zhT">${W.zh}</span></div><div class="road" style="height:${H}px"><svg viewBox="0 0 100 ${H}" preserveAspectRatio="none"><path class="rd1" d="${d}"/><path class="rd2" d="${d}"/></svg>
   ${Array.from({length:6},(_,i)=>`<span class="deco" style="left:${i%2?4+i:84-i}%;top:${8+i*16}%;animation-delay:-${i}s">${dc[i%3]}</span>`).join('')}
   ${ns.map((n,i)=>{const op=isOpen(n),st=S.stars[n.id]||0,K=KINDS[n.k],me=curL&&n.id===curL.id;return`<div class="node n-${n.k} ${op?'':'khoa'} ${me?'ht':''}" style="left:${pts[i][0]}%;top:${pts[i][1]}px;${K?`--k:${K.c};--kD:${K.d}`:''}"><button data-n="${n.id}" aria-label="Màn ${n.no}: ${n.n}"><b>${n.k==='boss'||n.k==='game'?n.e:n.no}</b></button><em>${[1,2,3].map(x=>`<i class="${x<=st?'':'t'}">★</i>`).join('')}</em>${me?'<i class="me">🐼</i>':''}</div>`}).join('')}</div>
@@ -457,7 +459,7 @@ const TWIST=[
  {e:'🎉',n:'Chơi cho vui',d:'Trộn đủ dạng câu',t:['mean','rev','chunk','listen']}];
 function planOf(d){const n=dayNo(d),r=rng(ymd(d)),keys=Object.keys(GAMES),flat=WORLDS.flatMap(W=>W.lessons.map((L,i)=>({W,L,i})));
  const deck=sshuf(keys,rng('xoay')),dat=!dOff&&LICH_HOM||{};let games=[0,1,2].map(k=>deck[(n*3+k)%deck.length]);if(dat.tro){const g=dat.tro.split(',').map(x=>x.trim()).filter(k=>GAMES[k]);if(g.length)games=g.slice(0,3)}
- const les=flat.find(x=>x.L.t===dat.bai)||flat[n%flat.length],weak=[...ALL].sort((a,b)=>(S.box[a.h]||0)-(S.box[b.h]||0)||r()-.5).slice(0,6);
+ const les=flat.find(x=>x.L.t===dat.bai)||flat[n%flat.length],weak=[...ALL].sort((a,b)=>uuTien(a)-uuTien(b)||r()-.5).slice(0,6);
  return{loi:dat.loi,tip:TIPS[n%TIPS.length],tw:TWIST[d.getDay()],games,les,word:ALL[r()*ALL.length|0],words:[...weak,...sshuf(les.L.words,r).slice(0,4)]}}
 function todayCard(){const d=curDate(),p=planOf(d),done=!!S.stars['day-'+ymd(d)];
  return`<section class="card homnay" style="--w:${p.les.W.c};--wD:${p.les.W.d}"><div class="hnTop"><div><small>${THU[d.getDay()]}, ${dmy(d)}</small><h2>Hôm nay ${p.tw.e} ${p.tw.n}</h2></div>${S.review?`<div class="hnNgay"><button class="mini" id="dLui" aria-label="Xem ngày trước">◀</button><button class="mini" id="dTien" aria-label="Xem ngày sau">▶</button></div>`:''}</div>
@@ -526,7 +528,7 @@ function vWords(){const n=[0,0,0,0];ALL.forEach(w=>n[S.box[w.h]||0]++);
  $('#tim').oninput=e=>{fQ=e.target.value.trim();paint()};
  $$('#fl .chip').forEach(b=>b.onclick=()=>{fW=b.dataset.w;$$('#fl .chip').forEach(c=>c.classList.toggle('on',c===b));paint()});
  $$('#fl2 .chip').forEach(b=>b.onclick=()=>{fL=b.dataset.l;$$('#fl2 .chip').forEach(c=>c.classList.toggle('on',c===b));paint()});
- $('#bTip').onclick=allTips;$('#bSai').onclick=moSai;$('#bOn').onclick=()=>{const ws=[...ALL].sort((a,b)=>(S.box[a.h]||0)-(S.box[b.h]||0)||Math.random()-.5).slice(0,10);const r=()=>{openPlay(null,null,'Ôn từ yếu');runQuiz({title:'Ôn từ yếu',words:ws,pool:ALL,n:10,again:r})};r()}}
+ $('#bTip').onclick=allTips;$('#bSai').onclick=moSai;$('#bOn').onclick=()=>{const ws=[...ALL].sort((a,b)=>uuTien(a)-uuTien(b)||Math.random()-.5).slice(0,10);const r=()=>{openPlay(null,null,'Ôn từ yếu');runQuiz({title:'Ôn từ yếu',words:ws,pool:ALL,n:10,again:r})};r()}}
 function wordSheet(h){const w=byH[h];sheet(`<div style="display:flex;gap:12px;align-items:center"><div class="tzg ${w.h.length>1?'dai':''}" style="flex:none;min-height:96px;${w.h.length>1?'':'width:96px;height:96px'}"><span class="zh" style="font-size:44px">${w.h}</span></div><div style="min-width:0"><div class="big">${w.e} ${w.v}</div><span class="py" style="font-size:18px">${w.p}</span><div>${tag(w)}</div></div></div><div class="chunk" style="background:var(--mint)"><span class="zh">${w.c}</span><small>${w.cp}</small><small>${w.cv}</small></div><div class="two"><button class="btn alt" onclick="say('${w.h}')">🔊 Nghe từ</button><button class="btn" onclick="say('${w.c}')">🔊 Nghe cụm</button></div>${micHTML('wM','🎤 Đọc thử cụm này')}`);say(w.h);ganMic('wM',w.c)}
 
 /* ===== Đề cương ===== */

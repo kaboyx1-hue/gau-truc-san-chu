@@ -1,6 +1,6 @@
 // Mo duoc khi mat mang. Co mang thi lay ban moi; mang yeu qua 2,5 giay thi dung ban da luu.
 const KHO = 'gt-6';
-const TEP = ['./', 'style.css', 'data.js', 'app.js', 'apps-script/Gop.js', 'audio.json', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
+const TEP = ['./', 'style.css', 'data.js', 'app.js', 'apps-script/Gop.js', 'hoc.js', 'audio.json', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(KHO).then(c => c.addAll(TEP)).then(() => self.skipWaiting()));
