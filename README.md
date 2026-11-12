@@ -8,6 +8,7 @@ Web game học từ vựng tiếng Trung theo đề HSK mới, cấp 1 đến c�
 |---|---|
 | `index.html`, `app.js`, `style.css` | Giao diện và các trò chơi |
 | `data.js` | Bài học gốc |
+| `hoc.js` | Logic thuần của việc học: chuỗi ngày, bậc nhớ cách quãng, chấm giọng nói. Có kiểm thử |
 | `audio.json` | Giọng đọc tạo sẵn, tạo bằng `tools/amthanh.py` |
 | `sw.js`, `manifest.webmanifest` | Mở khi mất mạng, thêm ra màn hình chính |
 | `apps-script/` | Máy chủ: Google Apps Script gắn với Sheet riêng |
